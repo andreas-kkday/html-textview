@@ -60,9 +60,9 @@ public class HtmlTagHandler implements WrapperTagHandler {
      * @return html with replaced <ul> and <li> tags
      * @see <a href="https://github.com/android/platform_frameworks_base/commit/8b36c0bbd1503c61c111feac939193c47f812190">Specific Android SDK Commit</a>
      */
-    String overrideTags(@Nullable String html) {
-
+    public String overrideTags(@Nullable String html) {
         if (html == null) return null;
+
         html = "<" + PLACEHOLDER_ITEM + "></" + PLACEHOLDER_ITEM + ">" + html;
         html = html.replace("<ul", "<" + UNORDERED_LIST);
         html = html.replace("</ul>", "</" + UNORDERED_LIST + ">");
@@ -86,9 +86,6 @@ public class HtmlTagHandler implements WrapperTagHandler {
      * we can continue with correct index of outer list
      */
     Stack<Integer> olNextIndex = new Stack<>();
-    /**
-     * List indentation in pixels. Nested lists use multiple of this.
-     */
     /**
      * Running HTML table string based off of the root table tag. Root table tag being the tag which
      * isn't embedded within any other table tag. Example:
@@ -123,8 +120,8 @@ public class HtmlTagHandler implements WrapperTagHandler {
     }
 
     private static class A {
-        private String text;
-        private String href;
+        private final String text;
+        private final String href;
 
         private A(String text, String href) {
             this.text = text;
