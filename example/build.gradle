@@ -1,12 +1,15 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android' version '1.8.22' apply true
+}
 
 android {
-    compileSdkVersion 35
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "org.sufficientlysecure.htmltextview.example"
-        minSdkVersion 14
-        targetSdkVersion 35
+        minSdkVersion 21
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
     }
@@ -15,6 +18,11 @@ android {
 
     dataBinding {
         enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
