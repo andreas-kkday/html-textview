@@ -4,6 +4,11 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.8.22' apply false
 }
 
+final group = "com.github.andreas-kkday"
+final artifact = "htmlTextView"
+final versionCode = 1
+final versionName = "4.0"
+
 android {
     compileSdkVersion 34
 
@@ -12,7 +17,6 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 34
-        versionName '4.0'
     }
 
     compileOptions {
@@ -21,8 +25,35 @@ android {
     }
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.findByName('release')
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = group
+                artifactId = artifact
+                version = versionName
+            }
+
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.findByName('debug')
+
+                groupId = group + ".debug"
+                artifactId = artifact + "-debug"
+                version = versionName
+            }
+        }
+    }
+}
+
 
 dependencies {
     implementation 'androidx.annotation:annotation:1.8.2'
 
- }
+}
