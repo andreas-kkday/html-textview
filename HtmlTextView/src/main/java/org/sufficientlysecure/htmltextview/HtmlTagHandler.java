@@ -278,7 +278,11 @@ public class HtmlTagHandler implements WrapperTagHandler {
                                 if (!clickConsumed) {
                                     super.onClick(widget);
                                 }
+                            } else {
+                                super.onClick(widget);
                             }
+                        } else {
+                            super.onClick(widget);
                         }
                     }
                 });
