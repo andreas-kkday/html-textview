@@ -268,11 +268,16 @@ public class HtmlTagHandler implements WrapperTagHandler {
                     @Override
                     public void onClick(View widget) {
                         if (onClickATagListenerProvider != null) {
-                            boolean clickConsumed =
-                                onClickATagListenerProvider.provideTagClickListener()
-                                                           .onClick(widget, spannedText, getURL());
-                            if (!clickConsumed) {
-                                super.onClick(widget);
+                            OnClickATagListener listener = onClickATagListenerProvider.provideTagClickListener();
+                            if(listener != null) {
+                                boolean clickConsumed = listener.onClick(
+                                    widget,
+                                    spannedText,
+                                    getURL()
+                                );
+                                if (!clickConsumed) {
+                                    super.onClick(widget);
+                                }
                             }
                         }
                     }
